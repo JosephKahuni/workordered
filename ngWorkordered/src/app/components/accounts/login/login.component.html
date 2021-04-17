@@ -1,0 +1,70 @@
+<div class="container">
+  <form [formGroup]="loginForm" (ngSubmit)="login()">
+    <div class="formHeader">
+      <h3>Login Form</h3>
+    </div>
+
+    <div class="form-group username">
+      <label for="username" class="required">Username/Payroll Number</label>
+      <input
+        type="text"
+        id="username"
+        formControlName="username"
+        class="form-control username"
+        appValidateUsernameFormat
+      />
+
+      <div
+        class="text-danger errors"
+        *ngIf="f.username.invalid && f.username.touched"
+      >
+        <div *ngIf="f.username.errors?.required">
+          Username/Payroll Number required.
+        </div>
+        <div *ngIf="f.username.errors?.invalidFormat">
+          {{ f.username.errors?.invalidFormat.value }}
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group password">
+      <label for="password" class="required">Password</label>
+      <div class="input-group">
+        <input
+          autocomplete="off"
+          id="password"
+          formControlName="password"
+          class="form-control password"
+          aria-describedby="inputGroupAddon"
+          [type]="showPassword ? 'text' : 'password'"
+        />
+        <div class="input-group-text">
+          <div class="input-group-append" id="inputGroupAddon">
+            <mat-icon matSuffix (click)="showPassword = !showPassword">
+              {{ showPassword ? "visibility_off" : "visibility" }}
+            </mat-icon>
+          </div>
+        </div>
+      </div>
+      <div
+        class="text-danger errors"
+        *ngIf="f.password.invalid && f.password.touched"
+      >
+        <div *ngIf="f.password.errors?.required">Password required.</div>
+      </div>
+    </div>
+
+    <div class="btn-group" role="group">
+      <div class="loginButton">
+        <button [disabled]="loginForm.invalid" class="btn btn-success btn-sm">
+          Login
+        </button>
+      </div>
+      <div class="forgotPassword">
+        <a class="forgotPasswordLink" (click)="changePasswordComponent()"
+          >Forgot password?</a
+        >
+      </div>
+    </div>
+  </form>
+</div>

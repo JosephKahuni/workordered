@@ -1,0 +1,51 @@
+/* You can add global styles to this file, and also import other style files */
+form label {
+  font-weight: bold;
+  font-style: oblique;
+}
+
+form label.required:after {
+  content: " *";
+  color: red;
+}
+
+body {
+  background-color: #eee;
+}
+
+form .formHeader {
+  color: green;
+  text-align: center;
+  font-style: italic;
+}
+
+.form-group .ng-pristine.ng-invalid.ng-touched,
+.ng-dirty.ng-invalid.ng-touched {
+  border-color: red;
+  border-radius: 6px;
+  border-width: 3px;
+}
+
+.form-group .ng-dirty.ng-valid.ng-touched {
+  border-color: green;
+  border-radius: 6px;
+  border-width: 3px;
+}
+
+/*
+span.isvalid:after
+{
+  content: '✓';
+  color: green;
+  }
+
+*/
+
+/* form input {
+    margin-bottom: 10px;
+    border-top-style: hidden;
+    border-right-style: hidden;
+    border-left-style: hidden;
+    border-bottom-style: groove;
+    background-color: #eee; */
+/* } */

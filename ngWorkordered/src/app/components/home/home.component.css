@@ -1,0 +1,24 @@
+.introduction {
+  color: green;
+}
+
+div#batteries img {
+  /* min-width: 220px; */
+  width: 100%;
+  height: auto;
+
+}
+
+img#imageOne {
+  padding-top: 3%;
+}
+
+img#imageTwo {
+  padding-top: 11%;
+}
+
+hr {
+  border: none;
+  height: 5px;
+  background-color: green;
+}

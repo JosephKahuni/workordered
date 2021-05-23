@@ -1,12 +1,12 @@
 <div class="d-flex justify-content-center">
   <div class="card">
-    <div class="card-heading text-center">
-      <h5>Add Alternative Phone Number</h5>
+    <div class="card-header text-center">
+      <h5>Change Primary Phone Number</h5>
     </div>
     <div class="card-body">
       <form
-        [formGroup]="addAlternativePhoneNumberForm"
-        (ngSubmit)="addAlternativePhoneNumber()"
+        [formGroup]="changePrimaryPhoneNumberForm"
+        (ngSubmit)="changePrimaryPhoneNumber()"
         autocomplete="off"
       >
         <div class="form-group fullname">
@@ -14,9 +14,9 @@
           <input
             type="text"
             id="fullname"
-            class="form-control"
-            readonly
+            class="fullname form-control"
             formControlName="fullname"
+            readonly
           />
         </div>
 
@@ -25,9 +25,9 @@
           <input
             type="text"
             id="username"
-            class="form-control"
-            readonly
+            class="username form-control"
             formControlName="username"
+            readonly
           />
         </div>
 
@@ -36,40 +36,48 @@
           <input
             type="text"
             id="payrollNumber"
-            class="form-control"
-            readonly
+            class="payrollNumber form-control"
             formControlName="payrollNumber"
+            readonly
           />
         </div>
 
-        <div class="form-group alternativePhoneNumber">
-          <label for="alternativePhoneNumber" class="required"
-            >Alternative Phone Number</label
+        <div class="form-group currentPhone">
+          <label for="currentPhone">Current Phone Number</label>
+          <input
+            type="text"
+            id="currentPhone"
+            class="currentPhone form-control"
+            formControlName="currentPhone"
+            readonly
+          />
+        </div>
+
+        <div class="form-group primaryPhoneNumber">
+          <label for="primaryPhoneNumber" class="required"
+            >New Phone Number</label
           >
           <input
             type="text"
-            id="alternativePhoneNumber"
-            class="form-control"
-            formControlName="alternativePhoneNumber"
+            id="primaryPhoneNumber"
+            class="primaryPhoneNumber form-control"
+            formControlName="primaryPhoneNumber"
             maxlength="10"
             appValidatePhoneFormat
             appVerifyUniquePoneNumber
           />
           <div
             class="errors text-danger"
-            *ngIf="
-              f.alternativePhoneNumber.invalid &&
-              f.alternativePhoneNumber.touched
-            "
+            *ngIf="f.primaryPhoneNumber.touched && f.primaryPhoneNumber.invalid"
           >
-            <div *ngIf="f.alternativePhoneNumber.errors?.required">
-              An alternative phone number is required
+            <div *ngIf="f.primaryPhoneNumber.errors?.required">
+              Phone number is required.
             </div>
-            <div *ngIf="f.alternativePhoneNumber.errors?.invalidFormat">
-              {{ f.alternativePhoneNumber.errors?.invalidFormat.value }}
+            <div *ngIf="f.primaryPhoneNumber.errors?.invalidFormat">
+              {{ f.primaryPhoneNumber.errors?.invalidFormat.value }}
             </div>
-            <div *ngIf="f.alternativePhoneNumber.errors?.phoneNumberRegistered">
-              {{ f.alternativePhoneNumber.errors?.phoneNumberRegistered.value }}
+            <div *ngIf="f.primaryPhoneNumber.errors?.phoneNumberRegistered">
+              {{ f.primaryPhoneNumber.errors?.phoneNumberRegistered.value }}
             </div>
           </div>
         </div>
@@ -79,11 +87,11 @@
           <div class="input-group">
             <input
               id="password"
-              autocomplete="off"
-              class="form-control"
+              class="password form-control"
               formControlName="password"
               [type]="showPassword ? 'text' : 'password'"
               aria-describedby="inputGroupAddon"
+              autocomplete="off"
             />
             <div class="input-group-text">
               <div class="input-group-append" id="inputGroupAddon">
@@ -95,20 +103,18 @@
           </div>
           <div
             class="errors text-danger"
-            *ngIf="f.password.invalid && f.password.touched"
+            *ngIf="f.password.touched && f.password.invalid"
           >
-            <div *ngIf="f.password.errors?.required">
-              A password is required.
-            </div>
+            <div *ngIf="f.password.errors?.required">Password is required.</div>
           </div>
         </div>
 
         <div class="submit-button">
           <button
-            class="btn btn-success btn-sm"
-            [disabled]="addAlternativePhoneNumberForm.invalid"
+            class="btn btn-sm btn-success"
+            [disabled]="changePrimaryPhoneNumberForm.invalid"
           >
-            Add Phone Number
+            Change Primary Phone Number
           </button>
         </div>
       </form>

@@ -1,4 +1,30 @@
-.loginText {
+.loginPageLink {
   margin-left: 15px;
 }
 
+div.select-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  /* safe keyword does not have multiplatform support as of 2021 */
+}
+
+div.select-wrapper > * {
+  width: 100%;
+  margin: auto;
+}
+
+select.select-group option.group-option {
+  max-width: 50%;
+  margin: auto;
+  align-self: auto;
+}
+
+/* label.select-label {
+
+} */
+
+
+/* div.select-errors {
+  
+} */

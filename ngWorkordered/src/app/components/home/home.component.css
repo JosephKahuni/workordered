@@ -6,15 +6,19 @@ div#batteries img {
   /* min-width: 220px; */
   width: 100%;
   height: auto;
-
 }
 
 img#imageOne {
   padding-top: 3%;
+  /* opacity: 0.6; */
 }
+/* img#imageOne:hover {
+  opacity: 1;
+} */
 
 img#imageTwo {
-  padding-top: 11%;
+  padding-top: 9%;
+  /* opacity: 2; */
 }
 
 hr {
@@ -22,3 +26,11 @@ hr {
   height: 5px;
   background-color: green;
 }
+
+/* @media only screen and (min-width: 550px) {
+  div#batteries img {
+    width: 100%;
+    max-width: 1000px;
+    height: auto;
+  }
+} */

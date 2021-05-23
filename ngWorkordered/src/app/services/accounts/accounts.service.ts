@@ -98,16 +98,16 @@ export class AccountsService {
 
     return refreshToken && refreshObj ?
       this.http.post(`${this.accountsUrl}/api/token/refresh/`, refreshObj)
-      .pipe(
-        map((user: any) => {
-          localStorage.setItem('access_token', user[`access`]);
-          this.subject.next(true);
-          this.startRefreshTokenTimer();
-          // tslint:disable-next-line: deprecation
-          this.getCurrentUser().subscribe();
+        .pipe(
+          map((user: any) => {
+            localStorage.setItem('access_token', user[`access`]);
+            this.subject.next(true);
+            this.startRefreshTokenTimer();
+            // tslint:disable-next-line: deprecation
+            this.getCurrentUser().subscribe();
 
-        }),
-        shareReplay()) : of(null);
+          }),
+          shareReplay()) : of(null);
   }
 
   private startRefreshTokenTimer(): any {
@@ -156,6 +156,14 @@ export class AccountsService {
 
   resetPassword(data: any): Observable<any> {
     return this.http.post(`${this.accountsUrl}/reset-password`, data)
+      .pipe(
+        shareReplay()
+      );
+  }
+
+  // change/add secondary phone number and change primary phone number
+  editPhoneNumber(newPhoneNumber: any): Observable<any> {
+    return this.http.post(`${this.accountsUrl}/change-secondary-phone-number`, newPhoneNumber)
       .pipe(
         shareReplay()
       );

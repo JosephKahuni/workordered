@@ -1,13 +1,126 @@
-.nav-item {
-  margin-right: 20px;
+/* basic styling */
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
 }
 
-.nav-item:hover {
-  color: whitesmoke;
-  background-color: whitesmoke;
+svg {
+  padding-right: 5px;
+  text-align: center;
+  vertical-align: center;
 }
 
-.salutation {
+body {
+  font-family: sans-serif;
+  font-size: 15px;
+}
+
+.navbar-brand {
+  padding: 5px 0 5px 8px;
+}
+
+/* entire navbar content - Main Content */
+nav.navbar.navbar-dark.bg-dark.sticky-top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+/* home link and login dropdown/collapsible content */
+.navbar-item:not(.first) {
+  display: flex;
+  text-align: left;
+  align-items: baseline;
+}
+
+/* First subitem - home link */
+.navbar-subitem:not(.second) {
+  padding: 5px 4px 5px 0;
+}
+
+/* Second subitem - login dropdown/collapsible content*/
+.navbar-subitem:not(.first) {
+  padding: 5px 4px;
+  /* width: 90px; */
+  width: auto;
+}
+
+/* custom color on the hamburger icon outline */
+button.btn.custom-color-toggler {
+  border-color: #007bff;
+}
+
+div#my-collapsible-navbar.navbar-nav div.nav-item a.nav-link {
   color: #007bff;
+  padding: 1px 0;
+}
+/* styling the nav items alone  */
+:is(.navbar-subitem) .nav-item {
+  padding: 0 15px 0 5px;
+}
+
+/* styling the dropdown menu for logged in users */
+:is(.navbar-subitem.second) a#dropdownContent.dropdown-toggle {
+  display: flex;
+  flex-flow: row nowrap;
+  width: auto;
+  align-items: center;
+  padding: 0 10px 7.5px 0;
+}
+
+/* space between avatar and dropdown caret */
+:is(.navbar-subitem.second) a#dropdownContent.dropdown-toggle > div.avatar {
+  margin-right: 3px;
+}
+
+:is(.navbar-subitem.second) a#dropdownContent.dropdown-toggle:hover {
   text-decoration: none;
+}
+
+/* color and background of the dropdown menu */
+div.dropdown-menu.dropdown-menu-right.show div.dropdown-item {
+  color: #007bff;
+  padding: 5px 10px;
+  /* Padding = T-R-B-L / TB-RL / T - RL - B */
+  cursor: pointer;
+  background-color: #343a40;
+}
+
+
+/* navbar nav items decoration on hover */
+:is(.navbar-nav) div.nav-item:hover {
+  text-decoration: underline;
+}
+
+/* MQ for very small screens */
+@media screen and (max-width: 350px) {
+  nav.navbar.navbar-dark.bg-dark.sticky-top {
+    display: block;
+    align-items: flex-start;
+  }
+
+  /* the navbar-brand */
+  .navbar-item:not(.second) {
+    order: 1;
+  }
+
+  /* the home and subsequent menu */
+  .navbar-item:not(.first) {
+    order: 2;
+    display: block;
+  }
+
+  /* the home page link */
+  .navbar-subitem:not(.second) {
+    order: 1;
+    padding: 5px 4px;
+  }
+
+  /* logged in/logged out menu's */
+  .navbar-subitem:not(.first) {
+    order: 2;
+    padding: 5px 4px; /*5 top/bottom and 4 left/right*/
+    width: auto;
+  }
 }

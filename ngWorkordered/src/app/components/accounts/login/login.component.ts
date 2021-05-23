@@ -1,10 +1,10 @@
 import { AlertsService } from '@services/alerts/alerts.service';
-import { CookieService } from 'ngx-cookie-service';
 import { AccountsService } from '@services/accounts/accounts.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-login',
@@ -19,6 +19,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private accountsService: AccountsService,
     private alertsService: AlertsService,
+    private spinner: NgxSpinnerService
   ) { }
 
   // login form initialization
@@ -29,7 +30,6 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   private returnUrl!: string;
   private loginSubscription!: Subscription;
-  private loginStatus = this.accountsService.isLoggedIn;
   alertOptions = {
     autoClose: true,
     keepAfterRouteChange: true
@@ -55,35 +55,46 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   login(): any {
+    this.spinner.show();
     this.loginSubscription = this.accountsService.login(this.loginForm.value)
       // tslint:disable-next-line: deprecation
       .subscribe({
-        // next: () => this.successCallback(),
+        next: () => this.successCallback(),
         error: () => this.errorCallback(),
         complete: () => this.completeCallback()
       });
 
   }
 
-  // successCallback(): void {
-  //   this.navbarService.loggedIn = true;
-  // }
+  private successCallback(): void {
+    this.spinner.hide();
+  }
 
   // login error callback
-  errorCallback(): void {
+  private errorCallback(): void {
+    this.refreshPage();
+    this.spinner.hide();
+    this.alertsService.error('Invalid login credentials. Please confirm your details and try again.',
+      this.alertOptions);
+
+
+  }
+
+  // login complete callback
+  private completeCallback(): void {
+    this.router.navigate([this.returnUrl]);
+    this.spinner.hide();
+  }
+
+  private refreshPage(): void {
     const currentUrl = this.router.url;
     this.router.navigateByUrl('/', { skipLocationChange: true })
       .then(() => {
         this.router.navigate([currentUrl]);
       });
-    this.alertsService.error('Invalid login credentials. Please confirm your details and try again.',
-      this.alertOptions);
+
   }
 
-  // login complete callback
-  completeCallback(): void {
-    this.router.navigate([this.returnUrl]);
-  }
 
   // forgot password link clicked
   changePasswordComponent(): void {

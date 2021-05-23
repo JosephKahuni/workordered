@@ -5,6 +5,7 @@ from django.db.models import Q
 from django.http.response import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth import get_user_model
+from django.forms.models import model_to_dict
 
 from rest_framework import status
 from rest_framework.decorators import api_view, permission_classes
@@ -230,7 +231,6 @@ def generate_other_names(user_obj):
 
 
 @api_view(["GET"])
-@permission_classes((IsAuthenticated,))
 def get_users(request):
 
     users = User.objects.all()
@@ -248,7 +248,6 @@ def get_users(request):
 
 
 @api_view(["GET"])
-@permission_classes((IsAuthenticated,))
 def get_current_user(request):
     user = request.user
     if user:
@@ -315,3 +314,62 @@ def reset_password(request):
         'message': 'no credentials'
     }
     return Response(no_user)
+
+
+@api_view(["GET"])
+def get_user_data(request):
+    try:
+        user = User.objects.get(id=request.user.id)
+    except User.DoesNotExist:
+        user = None
+
+    if not user:
+        return Response({
+            'message': "no user found"
+        })
+
+    # extract only the groups names from the groups object
+    groups_list = [group.name if group.name ==
+                   "QA" else group.name.title() for group in user.groups.all()]
+
+    # user object to construct the user profile
+    user_object = {
+        "firstName": user.first_name,
+        "lastName": user.last_name,
+        "fullname": user.fullname,
+        "username": user.username,
+        "payrollNumber": user.payroll_number,
+        "primaryPhoneNumber": user.phone_number,
+        "alternativePhoneNumber": user.alternative_phone_number,
+        "field": user.field,
+        "groups": groups_list
+    }
+
+    return Response(user_object)
+
+
+@api_view(['POST'])
+def change_phone_number(request):
+    user_obj = request.user
+    alternative_phone_number = request.data.get("alternativePhoneNumber")
+    primary_phone_number = request.data.get('primaryPhoneNumber')
+    password = request.data["password"]
+
+    if not user_obj or not password:
+        return Response({"message": "failure"}, status=status.HTTP_400_BAD_REQUEST)
+
+    try:
+        user = User.objects.get(payroll_number=user_obj.payroll_number)
+
+    except User.DoesNotExist:
+        user = None
+
+    if not user or not user.check_password(password):
+        return Response({"message": "failure"}, status=status.HTTP_400_BAD_REQUEST)
+
+    if alternative_phone_number:
+        user.alternative_phone_number = alternative_phone_number
+    elif primary_phone_number:
+        user.phone_number = primary_phone_number
+    user.save()
+    return Response({"message": "success"})

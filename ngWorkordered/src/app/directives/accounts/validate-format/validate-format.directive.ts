@@ -14,10 +14,10 @@ import { AbstractControl, NG_VALIDATORS, ValidationErrors, Validator } from '@an
 export class ValidateNameFormatDirective implements Validator {
   // validation errors = {[key: string]: any}
   validate(control: AbstractControl): ValidationErrors | null {
-    if (control.value.length === 0 || control.value.length < 3) {
+    if (control.value.length === 0 || control.value.length < 3 || control.value === null || control.value === undefined) {
       return null;
     }
-    const name = control.value;
+    const name = control.value.strip();
     const regex = new RegExp(environment.nameFormat);
     const valid = regex.test(name);
     return !valid ? { invalidFormat: { value: `${name} is invalid. Only letters and ' are allowed.` } } : null;
@@ -64,7 +64,7 @@ export class ValidatePayrollFormatDirective implements Validator {
 })
 export class ValidatePhoneFormatDirective implements Validator {
   validate(control: AbstractControl): { [key: string]: any } | null {
-    if (control.value.length === 0) {
+    if (control.value.length === 0 || control.value === null || control.value === undefined) {
       return null;
     }
     const phoneNumber = control.value;
@@ -85,8 +85,6 @@ export class ValidatePhoneFormatDirective implements Validator {
 })
 export class ValidateUsernameFormatDirective implements Validator {
   // @Input('validUsernameFormat') userNameFormat!: string;
-
-  // validation formats
   // validation errors = {[key: string]: any}
   validate(control: AbstractControl): ValidationErrors | null {
     if (control.value.length === 0 || control.value === null || control.value === undefined) {

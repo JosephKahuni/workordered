@@ -1,4 +1,4 @@
-import { NgModule, APP_INITIALIZER } from '@angular/core';
+import { NgModule, APP_INITIALIZER, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 // maodules - imports
 import { BrowserModule } from '@angular/platform-browser';
@@ -7,6 +7,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AvatarModule } from 'ngx-avatar';
+import { CommonModule } from '@angular/common';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 // components/directives/pipes - declarations
@@ -17,8 +21,11 @@ import { LoginComponent } from '@components/accounts/login/login.component';
 import { RegisterComponent } from '@components/accounts/register/register.component';
 import { AlertsComponent } from '@components/alerts/alerts.component';
 import { ChangePasswordComponent } from '@components/accounts/change-password/change-password.component';
-import { ChangePhoneNumberComponent } from '@components/accounts/change-phone-number/change-phone-number.component';
 import { AddPhoneNumberComponent } from '@components/accounts/add-phone-number/add-phone-number.component';
+import { UserProfileComponent } from '@components/user-profile/user-profile.component';
+import { ChangePrimaryComponent } from '@components/accounts/change-phone-number/change-primary/change-primary.component';
+import { ChangeSecondaryComponent } from '@components/accounts/change-phone-number/change-secondary/change-secondary.component';
+
 import {
   ValidateNameFormatDirective,
   ValidatePayrollFormatDirective,
@@ -43,7 +50,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { AlertsService } from '@services/alerts/alerts.service';
 import { JwtInterceptor } from '@interceptors/jwt/jwt';
 import { appInitializer } from '@initializer/app.initializer';
-
+import { ErrorsInterceptor } from '@interceptors/error/error.interceptor';
 
 
 @NgModule({
@@ -64,9 +71,11 @@ import { appInitializer } from '@initializer/app.initializer';
     VerifyUniquePayrollNumberDirective,
     ConfirmIfTechnicianDirective,
     ChangePasswordComponent,
-    ChangePhoneNumberComponent,
     AddPhoneNumberComponent,
-    VerifyUserExistsDirective
+    VerifyUserExistsDirective,
+    UserProfileComponent,
+    ChangePrimaryComponent,
+    ChangeSecondaryComponent,
   ],
 
   imports: [
@@ -76,7 +85,12 @@ import { appInitializer } from '@initializer/app.initializer';
     ReactiveFormsModule,
     MatIconModule,
     MatFormFieldModule,
-    HttpClientModule
+    HttpClientModule,
+    AvatarModule,
+    CommonModule,
+    NgxSpinnerModule,
+    BrowserAnimationsModule
+
   ],
 
   providers: [
@@ -85,11 +99,14 @@ import { appInitializer } from '@initializer/app.initializer';
       multi: true, deps: [AccountsService]
     },
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    // { provide: HTTP_INTERCEPTORS, useClass: ErrorsInterceptor, multi: true },
 
     AccountsService,
     CookieService,
     AlertsService
   ],
+
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 
   bootstrap: [AppComponent]
 })

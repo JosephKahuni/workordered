@@ -1,265 +1,289 @@
-<div class="container">
-  <form [formGroup]="registrationForm" (ngSubmit)="register()">
-    <div class="formHeader">
+<div class="d-flex justify-content-center">
+  <div class="card">
+    <div class="card-header text-center">
       <h3>Registration Form</h3>
     </div>
-
-    <div class="form-group first_name">
-      <label for="first_name" class="required">First Name</label>
-      <input
-        type="text"
-        id="first_name"
-        formControlName="first_name"
-        class="form-control first_name"
-        minlength="3"
-        appValidateNameFormat
-      />
-
-      <div
-        class="text-danger errors"
-        *ngIf="f.first_name.invalid && f.first_name.touched"
+    <div class="card-body">
+      <form
+        [formGroup]="registrationForm"
+        (ngSubmit)="register()"
+        autocomplete="off"
       >
-        <div *ngIf="f.first_name.errors?.required">First name required.</div>
-        <div *ngIf="f.first_name.errors?.invalidFormat">
-          {{ f.first_name.errors?.invalidFormat.value }}
-        </div>
-        <div *ngIf="f.first_name.errors?.minlength">
-          You have typed
-          {{ f.first_name.errors?.minlength.actualLength }} character(s) but at
-          least {{ f.first_name.errors?.minlength.requiredLength }} are
-          required.
-        </div>
-      </div>
-    </div>
+        <div class="form-group first_name">
+          <label for="first_name" class="required">First Name</label>
+          <input
+            type="text"
+            id="first_name"
+            formControlName="first_name"
+            class="form-control first_name"
+            minlength="3"
+            appValidateNameFormat
+          />
 
-    <div class="form-group last_name">
-      <label for="last_name" class="required">Last Name</label>
-      <input
-        type="text"
-        id="last_name"
-        formControlName="last_name"
-        class="form-control last_name"
-        minlength="3"
-        appValidateNameFormat
-      />
-
-      <div
-        class="text-danger errors"
-        *ngIf="f.last_name.invalid && f.last_name.touched"
-      >
-        <div *ngIf="f.last_name.errors?.required">Last name required.</div>
-        <div *ngIf="f.last_name.errors?.invalidFormat">
-          {{ f.last_name.errors?.invalidFormat.value }}
-        </div>
-        <div *ngIf="f.last_name.errors?.minlength">
-          You have typed
-          {{ f.last_name.errors?.minlength.actualLength }} character(s) but at
-          least {{ f.last_name.errors?.minlength.requiredLength }} are required.
-        </div>
-      </div>
-    </div>
-
-    <div class="form-group payroll_number">
-      <label for="payroll_number" class="required">Payroll Number</label>
-      <input
-        type="text"
-        id="payroll_number"
-        formControlName="payroll_number"
-        class="form-control payroll_number"
-        minlength="2"
-        maxlength="9"
-        appValidatePayrollFormat
-        appVerifyUniquePayrollNumber
-      />
-      <div
-        class="text-danger errors"
-        *ngIf="f.payroll_number.invalid && f.payroll_number.touched"
-      >
-        <div *ngIf="f.payroll_number.errors?.required">
-          Payroll number required.
-        </div>
-        <div *ngIf="f.payroll_number.errors?.invalidFormat">
-          {{ f.payroll_number.errors?.invalidFormat.value }}
-        </div>
-        <div *ngIf="f.payroll_number.errors?.minlength">
-          You have typed
-          {{ f.payroll_number.errors?.minlength.actualLength }} character(s) but
-          at least {{ f.payroll_number.errors?.minlength.requiredLength }} are
-          required. Use format cas 12345 or 12345.
-        </div>
-        <div *ngIf="f.payroll_number.errors?.payrollNumberRegistered">
-          {{ f.payroll_number.errors?.payrollNumberRegistered.value }}
-        </div>
-      </div>
-    </div>
-
-    <div class="form-group phone_number">
-      <label for="phone_number" class="required">Phone Number</label>
-      <input
-        type="text"
-        id="phone_number"
-        name="phone_number"
-        formControlName="phone_number"
-        class="form-control phone_number"
-        maxlength="10"
-        appValidatePhoneFormat
-        appVerifyUniquePoneNumber
-      />
-      <div
-        class="text-danger errors"
-        *ngIf="f.phone_number.invalid && f.phone_number.touched"
-      >
-        <div *ngIf="f.phone_number.errors?.required">
-          Phone number required.
-        </div>
-        <div *ngIf="f.phone_number.errors?.invalidFormat">
-          {{ f.phone_number.errors?.invalidFormat.value }}
-        </div>
-        <div *ngIf="f.phone_number.errors?.phoneNumberRegistered">
-          {{ f.phone_number.errors?.phoneNumberRegistered.value }}
-        </div>
-      </div>
-    </div>
-
-    <div class="form-group alternative_phone_number">
-      <label for="alternative_phone_number">Phone Number 2</label>
-      <input
-        type="text"
-        id="alternative_phone_number"
-        placeholder="Optional alternative phone number"
-        formControlName="alternative_phone_number"
-        maxlength="10"
-        class="form-control alternative_phone_number"
-        appValidatePhoneFormat
-        appComparePhoneNumbers
-        comparePhoneWith="phone_number"
-        appVerifyUniquePoneNumber
-      />
-      <div
-        class="text-danger errors"
-        *ngIf="
-          f.alternative_phone_number.invalid &&
-          f.alternative_phone_number.touched
-        "
-      >
-        <div *ngIf="f.alternative_phone_number.errors?.invalidFormat">
-          {{ f.alternative_phone_number.errors?.invalidFormat.value }}
-        </div>
-        <div *ngIf="f.alternative_phone_number.errors?.phoneNumbersMatch">
-          {{ f.alternative_phone_number.errors.phoneNumbersMatch.value }}
-        </div>
-        <div *ngIf="f.alternative_phone_number.errors?.phoneNumberRegistered">
-          {{ f.alternative_phone_number.errors?.phoneNumberRegistered.value }}
-        </div>
-      </div>
-    </div>
-
-    <div class="form-group group">
-      <label for="group" class="required">Group</label>
-      <select
-        id="group"
-        formControlName="group"
-        class="form-control group"
-        appConfirmIfTechnician
-      >
-        <option value="">--select your group--</option>
-        <option *ngFor="let group of groups" value="{{ group }}">
-          {{ group }}
-        </option>
-      </select>
-      <div
-        class="text-danger errors"
-        *ngIf="f.group.invalid && f.group.touched"
-      >
-        <div *ngIf="f.group.errors?.required">Group required.</div>
-        <div *ngIf="f.group.errors?.notTechnician">
-          {{ f.group.errors?.notTechnician.value }}
-        </div>
-      </div>
-    </div>
-
-    <div class="form-group password">
-      <label for="password" class="required">Password</label>
-      <div class="input-group">
-        <input
-          autocomplete="off"
-          id="password"
-          name="password"
-          formControlName="password"
-          class = "form-control password"
-          [type]="showPassword ? 'text' : 'password'"
-          aria-describedby="inputGroupAddon"
-        />
-        <div class="input-group-text">
-          <div class="input-group-append" id="inputGroupAddon">
-            <mat-icon matSuffix (click)="showPassword = !showPassword">
-              {{ showPassword ? "visibility_off" : "visibility" }}
-            </mat-icon>
+          <div
+            class="text-danger errors"
+            *ngIf="f.first_name.invalid && f.first_name.touched"
+          >
+            <div *ngIf="f.first_name.errors?.required">
+              First name required.
+            </div>
+            <div *ngIf="f.first_name.errors?.invalidFormat">
+              {{ f.first_name.errors?.invalidFormat.value }}
+            </div>
+            <div *ngIf="f.first_name.errors?.minlength">
+              You have typed
+              {{ f.first_name.errors?.minlength.actualLength }} character(s) but
+              at least {{ f.first_name.errors?.minlength.requiredLength }} are
+              required.
+            </div>
           </div>
         </div>
-      </div>
-      <div
-        class="text-danger errors"
-        *ngIf="f.password.invalid && f.password.touched"
-      >
-        <div *ngIf="f.password.errors?.required">Password required.</div>
-      </div>
-    </div>
 
-    <div class="form-group password_confirmation">
-      <label for="password_confirmation" class="required">
-        Confirm Password
-      </label>
-      <div class="input-group">
-        <input
-          autocomplete="off"
-          id="password_confirmation"
-          formControlName="password_confirmation"
-          class = "password_confirmation form-control"
-          [type]="showPasswordConfirmation ? 'text' : 'password'"
-          aria-describedby="inputGroupAddon"
-          appComparePasswords
-          comparePasswordWith="password"
-        />
-        <div class="input-group-text">
-          <div class="input-group-append" id="inputGroupAddon">
-            <mat-icon
-              matSuffix
-              (click)="showPasswordConfirmation = !showPasswordConfirmation"
+        <div class="form-group last_name">
+          <label for="last_name" class="required">Last Name</label>
+          <input
+            type="text"
+            id="last_name"
+            formControlName="last_name"
+            class="form-control last_name"
+            minlength="3"
+            appValidateNameFormat
+          />
+
+          <div
+            class="text-danger errors"
+            *ngIf="f.last_name.invalid && f.last_name.touched"
+          >
+            <div *ngIf="f.last_name.errors?.required">Last name required.</div>
+            <div *ngIf="f.last_name.errors?.invalidFormat">
+              {{ f.last_name.errors?.invalidFormat.value }}
+            </div>
+            <div *ngIf="f.last_name.errors?.minlength">
+              You have typed
+              {{ f.last_name.errors?.minlength.actualLength }} character(s) but
+              at least {{ f.last_name.errors?.minlength.requiredLength }} are
+              required.
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group payroll_number">
+          <label for="payroll_number" class="required">Payroll Number</label>
+          <input
+            type="text"
+            id="payroll_number"
+            formControlName="payroll_number"
+            class="form-control payroll_number"
+            minlength="2"
+            maxlength="9"
+            appValidatePayrollFormat
+            appVerifyUniquePayrollNumber
+          />
+          <div
+            class="text-danger errors"
+            *ngIf="f.payroll_number.invalid && f.payroll_number.touched"
+          >
+            <div *ngIf="f.payroll_number.errors?.required">
+              Payroll number required.
+            </div>
+            <div *ngIf="f.payroll_number.errors?.invalidFormat">
+              {{ f.payroll_number.errors?.invalidFormat.value }}
+            </div>
+            <div *ngIf="f.payroll_number.errors?.minlength">
+              You have typed
+              {{ f.payroll_number.errors?.minlength.actualLength }}
+              character(s) but at least
+              {{ f.payroll_number.errors?.minlength.requiredLength }} are
+              required. Use format cas 12345 or 12345.
+            </div>
+            <div *ngIf="f.payroll_number.errors?.payrollNumberRegistered">
+              {{ f.payroll_number.errors?.payrollNumberRegistered.value }}
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group phone_number">
+          <label for="phone_number" class="required">Phone Number</label>
+          <input
+            type="text"
+            id="phone_number"
+            name="phone_number"
+            formControlName="phone_number"
+            class="form-control phone_number"
+            maxlength="10"
+            appValidatePhoneFormat
+            appVerifyUniquePoneNumber
+          />
+          <div
+            class="text-danger errors"
+            *ngIf="f.phone_number.invalid && f.phone_number.touched"
+          >
+            <div *ngIf="f.phone_number.errors?.required">
+              Phone number required.
+            </div>
+            <div *ngIf="f.phone_number.errors?.invalidFormat">
+              {{ f.phone_number.errors?.invalidFormat.value }}
+            </div>
+            <div *ngIf="f.phone_number.errors?.phoneNumberRegistered">
+              {{ f.phone_number.errors?.phoneNumberRegistered.value }}
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group alternative_phone_number">
+          <label for="alternative_phone_number">Phone Number 2</label>
+          <input
+            type="text"
+            id="alternative_phone_number"
+            placeholder="Optional alternative phone number"
+            formControlName="alternative_phone_number"
+            maxlength="10"
+            class="form-control alternative_phone_number"
+            appValidatePhoneFormat
+            appComparePhoneNumbers
+            comparePhoneWith="phone_number"
+            appVerifyUniquePoneNumber
+          />
+          <div
+            class="text-danger errors"
+            *ngIf="
+              f.alternative_phone_number.invalid &&
+              f.alternative_phone_number.touched
+            "
+          >
+            <div *ngIf="f.alternative_phone_number.errors?.invalidFormat">
+              {{ f.alternative_phone_number.errors?.invalidFormat.value }}
+            </div>
+            <div *ngIf="f.alternative_phone_number.errors?.phoneNumbersMatch">
+              {{ f.alternative_phone_number.errors.phoneNumbersMatch.value }}
+            </div>
+            <div
+              *ngIf="f.alternative_phone_number.errors?.phoneNumberRegistered"
             >
-              {{ showPasswordConfirmation ? "visibility_off" : "visibility" }}
-            </mat-icon>
+              {{
+                f.alternative_phone_number.errors?.phoneNumberRegistered.value
+              }}
+            </div>
           </div>
         </div>
-      </div>
-      <div
-        class="text-danger errors"
-        *ngIf="
-          f.password_confirmation.invalid && f.password_confirmation.touched
-        "
-      >
-        <div *ngIf="f.password_confirmation.errors?.required">
-          Confirmation password required.
-        </div>
-        <div *ngIf="f.password_confirmation.errors?.passwordsMismatch">
-          {{ f.password_confirmation.errors?.passwordsMismatch.value }}
-        </div>
-      </div>
-    </div>
 
-    <div class="btn-group" role="group">
-      <div class="registerButton">
-        <button
-          [disabled]="registrationForm.invalid"
-          class="btn btn-success btn-sm"
-        >
-          Register
-        </button>
-      </div>
-      <div class="loginButton">
-        <span class="text loginText">Already registered? </span>
-        <a class="loginPageLink" (click)="loginPage()">Login</a>
-      </div>
+        <div class="form-group group">
+          <div class="select-wrapper">
+            <label for="group" class="required select-label">Group</label>
+            <select
+              id="group"
+              formControlName="group"
+              class="form-control select-group"
+              required
+              appConfirmIfTechnician
+            >
+              <option value="" selected class="select-option">--select group--</option>
+              <option
+                class="group-option"
+                *ngFor="let group of groups"
+                value="{{ group }}"
+              >
+                {{ group }}
+              </option>
+            </select>
+            <div
+              class="text-danger errors select-errors"
+              *ngIf="f.group.invalid && f.group.touched"
+            >
+              <div *ngIf="f.group.errors?.required">Group required.</div>
+              <div *ngIf="f.group.errors?.notTechnician">
+                {{ f.group.errors?.notTechnician.value }}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group password">
+          <label for="password" class="required">Password</label>
+          <div class="input-group">
+            <input
+              autocomplete="off"
+              id="password"
+              name="password"
+              formControlName="password"
+              class="form-control password"
+              [type]="showPassword ? 'text' : 'password'"
+              aria-describedby="inputGroupAddon"
+            />
+            <div class="input-group-text">
+              <div class="input-group-append" id="inputGroupAddon">
+                <mat-icon matSuffix (click)="showPassword = !showPassword">
+                  {{ showPassword ? "visibility_off" : "visibility" }}
+                </mat-icon>
+              </div>
+            </div>
+          </div>
+          <div
+            class="text-danger errors"
+            *ngIf="f.password.invalid && f.password.touched"
+          >
+            <div *ngIf="f.password.errors?.required">Password required.</div>
+          </div>
+        </div>
+
+        <div class="form-group password_confirmation">
+          <label for="password_confirmation" class="required">
+            Confirm Password
+          </label>
+          <div class="input-group">
+            <input
+              autocomplete="off"
+              id="password_confirmation"
+              formControlName="password_confirmation"
+              class="password_confirmation form-control"
+              [type]="showPasswordConfirmation ? 'text' : 'password'"
+              aria-describedby="inputGroupAddon"
+              appComparePasswords
+              comparePasswordWith="password"
+            />
+            <div class="input-group-text">
+              <div class="input-group-append" id="inputGroupAddon">
+                <mat-icon
+                  matSuffix
+                  (click)="showPasswordConfirmation = !showPasswordConfirmation"
+                >
+                  {{
+                    showPasswordConfirmation ? "visibility_off" : "visibility"
+                  }}
+                </mat-icon>
+              </div>
+            </div>
+          </div>
+          <div
+            class="text-danger errors"
+            *ngIf="
+              f.password_confirmation.invalid && f.password_confirmation.touched
+            "
+          >
+            <div *ngIf="f.password_confirmation.errors?.required">
+              Confirmation password required.
+            </div>
+            <div *ngIf="f.password_confirmation.errors?.passwordsMismatch">
+              {{ f.password_confirmation.errors?.passwordsMismatch.value }}
+            </div>
+          </div>
+        </div>
+
+        <div class="btn-group" role="group">
+          <div class="registerButton">
+            <button
+              [disabled]="registrationForm.invalid"
+              class="btn btn-success btn-sm"
+            >
+              Register
+            </button>
+          </div>
+          <div class="loginButton">
+            <span class="text loginPageLink">Already registered? </span>
+            <a class="loginPageLink" (click)="loginPage()">Login</a>
+          </div>
+        </div>
+      </form>
     </div>
-  </form>
+  </div>
 </div>

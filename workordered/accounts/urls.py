@@ -7,7 +7,9 @@ from accounts.views import (
     verify_unique_phone,
     get_current_user,
     verify_user_exists,
-    reset_password)
+    reset_password,
+    get_user_data,
+    change_phone_number)
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView)
@@ -28,6 +30,12 @@ urlpatterns = [
     # changing password
     url(r"verify-user-exists", verify_user_exists, name="verify_user_exists"),
     path("reset-password", reset_password, name="reset_password"),
+
+    # for user profile
+    path("get-user-data", get_user_data, name="get_user_data"),
+
+    # change the phone number
+    path("change-secondary-phone-number", change_phone_number, name="change_phone_number"),
 
 
     # for JWT

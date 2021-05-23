@@ -32,6 +32,11 @@ form .formHeader {
   border-width: 3px;
 }
 
+.card {
+  width: 500px;
+}
+
+
 /*
 span.isvalid:after
 {

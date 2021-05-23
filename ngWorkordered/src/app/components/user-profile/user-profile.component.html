@@ -1,0 +1,207 @@
+<ngx-spinner
+  size="medium"
+  color="#fff" 
+  bdColor="rgba(100,100,100,1)"
+  type="ball-clip-rotate"
+  ><p class="loading-spinner">Loading...</p></ngx-spinner
+>
+<div class="d-flex justify-content-center">
+  <div class="card">
+    <div class="card-heading text-center">
+      <h5 class="card-header text-muted text-center">User Information</h5>
+    </div>
+
+    <div class="card-body">
+      <table class="table table-striped">
+        <thead class="thead-dark table-header">
+          <tr>
+            <th scope="col" id="item">Item</th>
+            <th scope="col" id="value">Value</th>
+            <th scope="col" id="actions">Actions</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr class="first-name">
+            <th scope="row">First Name</th>
+            <td>{{ userData?.firstName }}</td>
+            <td class="action-data">-</td>
+          </tr>
+
+          <tr class="last-name">
+            <th scope="row">Last Name</th>
+            <td>{{ userData?.lastName }}</td>
+            <td class="action-data">-</td>
+          </tr>
+
+          <tr class="fullname">
+            <th scope="row">Fullname</th>
+            <td>{{ userData?.fullname }}</td>
+            <td class="action-data">-</td>
+          </tr>
+
+          <tr class="username">
+            <th scope="row">Username</th>
+            <td>{{ userData?.username }}</td>
+            <td class="action-data">-</td>
+          </tr>
+
+          <tr class="payroll-number">
+            <th scope="row">Payroll Number</th>
+            <td>{{ userData?.payrollNumber }}</td>
+            <td class="action-data">-</td>
+          </tr>
+
+          <tr class="phone-number">
+            <th scope="row">Phone Number</th>
+            <td>{{ userData?.primaryPhoneNumber }}</td>
+            <td class="action-data">
+              <button
+                type="button"
+                id="edit_phone_number_button"
+                class="btn btn-sm btn-outline-primary mr-1"
+                (click)="changePrimaryPhoneNumber()"
+                data-toggle="modal"
+                data-backdrop="static"
+                data-keyboard="false"
+              >
+                <svg
+                  width="1em"
+                  height="1em"
+                  viewBox="0 0 16 16"
+                  class="bi bi-pencil-square"
+                  fill="currentColor"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"
+                  />
+                  <path
+                    fill-rule="evenodd"
+                    d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"
+                  />
+                </svg>
+              </button>
+            </td>
+          </tr>
+
+          <tr class="alternative-phone-number">
+            <th scope="row">Alternative Phone</th>
+            <div
+              *ngIf="
+                userData?.alternativePhoneNumber;
+                then alternativePhoneNumber;
+                else noAlternativePhoneNumber
+              "
+            ></div>
+
+            <ng-template #alternativePhoneNumber>
+              <td>{{ userData?.alternativePhoneNumber }}</td>
+              <td class="action-data">
+                <button
+                  type="button"
+                  id="edit_phone_number_button"
+                  class="btn btn-sm btn-outline-primary mr-1"
+                  (click)="changeSecondaryPhoneNumber()"
+                  data-toggle="modal"
+                  data-backdrop="static"
+                  data-keyboard="false"
+                >
+                  <svg
+                    width="1em"
+                    height="1em"
+                    viewBox="0 0 16 16"
+                    class="bi bi-pencil-square"
+                    fill="currentColor"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"
+                    />
+                    <path
+                      fill-rule="evenodd"
+                      d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"
+                    />
+                  </svg>
+                </button>
+
+                <button
+                  type="button"
+                  id="delete_phone_number_button"
+                  class="btn btn-sm btn-outline-primary"
+                  (click)="deleteSecondaryPhoneNumber()"
+                >
+                  <svg
+                    width="1em"
+                    height="1em"
+                    viewBox="0 0 16 16"
+                    class="bi bi-trash"
+                    fill="currentColor"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"
+                    />
+                    <path
+                      fill-rule="evenodd"
+                      d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"
+                    />
+                  </svg>
+                </button>
+              </td>
+            </ng-template>
+
+            <ng-template #noAlternativePhoneNumber>
+              <td>Not Set</td>
+              <td class="action-data">
+                <button
+                  type="button"
+                  id="edit_phone_number_button"
+                  class="btn btn-sm btn-outline-primary mr-1"
+                  (click)="addSecondaryPhoneNumber()"
+                  data-toggle="modal"
+                  data-backdrop="static"
+                  data-keyboard="false"
+                >
+                  <svg
+                    width="1em"
+                    height="1em"
+                    viewBox="0 0 16 16"
+                    class="bi bi-pencil-square"
+                    fill="currentColor"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"
+                    />
+                    <path
+                      fill-rule="evenodd"
+                      d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"
+                    />
+                  </svg>
+                </button>
+              </td>
+            </ng-template>
+          </tr>
+
+          <tr class="field">
+            <th scope="row">Field</th>
+            <td>{{ userData?.field }}</td>
+            <td class="action-data">-</td>
+          </tr>
+
+          <tr class="groups">
+            <th id="user-groups" rowspan="userGroups?.length">Group(s)</th>
+
+            <td>
+              <li *ngFor="let group of userGroups">
+                {{ group }}
+              </li>
+            </td>
+            <td class="action-data">-</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

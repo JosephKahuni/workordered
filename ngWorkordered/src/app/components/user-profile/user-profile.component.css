@@ -1,0 +1,49 @@
+ngx-spinner p.loading-spinner {
+  color: white;
+  padding-top: 20px;
+  font-size: 20px;
+}
+
+.table-header {
+  text-align: center;
+}
+
+#item {
+  width: 40%;
+}
+
+#value {
+  width: 35%;
+}
+
+#action {
+  width: 25%;
+}
+
+.action-data {
+  text-align: center;
+}
+
+td {
+  text-align: center;
+}
+
+.card {
+  width: 500px;
+}
+
+table.table,
+td,
+th {
+  vertical-align: middle;
+}
+
+table.table tbody tr.groups td>li {
+  list-style-type: none;
+  text-align: center;
+  margin: 1px;
+}
+
+table.table tr:hover {
+  background-color: rgb(56, 143, 56);
+}

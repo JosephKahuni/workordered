@@ -11,11 +11,7 @@ svg {
   vertical-align: center;
 }
 
-body {
-  font-family: sans-serif;
-  font-size: 15px;
-}
-
+/* already being treated as a nav-item  */
 .navbar-brand {
   padding: 5px 0 5px 8px;
 }
@@ -31,6 +27,8 @@ nav.navbar.navbar-dark.bg-dark.sticky-top {
 .navbar-item:not(.first) {
   display: flex;
   text-align: left;
+  padding: 5px 0 5px 8px;
+
   align-items: baseline;
 }
 
@@ -51,12 +49,13 @@ button.btn.custom-color-toggler {
   border-color: #007bff;
 }
 
-div#my-collapsible-navbar.navbar-nav div.nav-item a.nav-link {
-  color: #007bff;
+div#my-collapsible-navbar.navbar-nav div.custom-nav-item a.nav-item {
+  /* color: #007bff; */
   padding: 1px 0;
 }
+
 /* styling the nav items alone  */
-:is(.navbar-subitem) .nav-item {
+:is(.navbar-subitem) .custom-nav-item {
   padding: 0 15px 0 5px;
 }
 
@@ -85,12 +84,6 @@ div.dropdown-menu.dropdown-menu-right.show div.dropdown-item {
   /* Padding = T-R-B-L / TB-RL / T - RL - B */
   cursor: pointer;
   background-color: #343a40;
-}
-
-
-/* navbar nav items decoration on hover */
-:is(.navbar-nav) div.nav-item:hover {
-  text-decoration: underline;
 }
 
 /* MQ for very small screens */

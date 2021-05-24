@@ -39,11 +39,20 @@
       "@environments/*": [
         "src/environments/*"
       ],
-      "@models/*": [
-        "src/app/models/*"
+      "@alerts/*": [
+        "src/app/alerts/*"
       ],
       "@interceptors/*": [
         "src/app/interceptors/*"
+      ],
+      "@home/*": [
+        "src/app/home/*"
+      ],
+      "@accounts/*": [
+        "src/app/accounts/*"
+      ],
+      "@nav/*": [
+        "src/app/nav/*"
       ]
     }
   },

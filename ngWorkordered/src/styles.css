@@ -36,21 +36,8 @@ form .formHeader {
   width: 500px;
 }
 
-
-/*
-span.isvalid:after
-{
-  content: '✓';
-  color: green;
-  }
-
-*/
-
-/* form input {
-    margin-bottom: 10px;
-    border-top-style: hidden;
-    border-right-style: hidden;
-    border-left-style: hidden;
-    border-bottom-style: groove;
-    background-color: #eee; */
-/* } */
+ngx-spinner p.loading-spinner {
+  color: white;
+  padding-top: 20px;
+  font-size: 20px;
+}

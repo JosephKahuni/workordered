@@ -14,10 +14,10 @@ import { AbstractControl, NG_VALIDATORS, ValidationErrors, Validator } from '@an
 export class ValidateNameFormatDirective implements Validator {
   // validation errors = {[key: string]: any}
   validate(control: AbstractControl): ValidationErrors | null {
-    if (control.value.length === 0 || control.value.length < 3 || control.value === null || control.value === undefined) {
+    if (control.value.length === 0 || control.value === null || control.value === undefined) {
       return null;
     }
-    const name = control.value.strip();
+    const name = control.value.trim();
     const regex = new RegExp(environment.nameFormat);
     const valid = regex.test(name);
     return !valid ? { invalidFormat: { value: `${name} is invalid. Only letters and ' are allowed.` } } : null;

@@ -2,7 +2,7 @@ import { AccountsService } from '@services/accounts/accounts.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { AlertsService } from '@services/alerts/alerts.service';
+import { AlertsService } from '@alerts/services/alerts.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -32,11 +32,6 @@ export class RegisterComponent implements OnInit, OnDestroy {
   // for the alert
   username!: string;
 
-  // for alerts options
-  alertOptions = {
-    keepAfterRouteChange: true,
-    autoClose: true
-  };
 
   ngOnInit(): void {
     this.registrationForm = this.fb.group({
@@ -69,7 +64,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
       }],
       password_confirmation: ['', {
         validators: [Validators.required]
-       
+
       }]
     });
   }
@@ -86,21 +81,20 @@ export class RegisterComponent implements OnInit, OnDestroy {
       // tslint:disable-next-line: deprecation
       .subscribe(
         {
-          next: (user: any) => this.registrationSuccessfulCallback(user),
-          complete: () => this.registrationCompleteCallback()
+          next: (user: any) => this.registrationSuccessful(user),
+          complete: () => this.registrationComplete()
         }
       );
   }
 
   // successfull registration callback
-  registrationSuccessfulCallback(user: any): void {
+  registrationSuccessful(user: any): void {
     this.username = user[`message`];
   }
 
-  registrationCompleteCallback(): void {
+  registrationComplete(): void {
     this.alertsService.success(
-      `Registration successful. Your username is ${this.username}. (This message will close automatically)`,
-      this.alertOptions
+      `Registration successful. Your username is ${this.username}.`
     );
     this.router.navigate(['login']);
 

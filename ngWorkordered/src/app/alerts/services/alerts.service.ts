@@ -1,9 +1,11 @@
-import { Alert, AlertType } from '@models/alerts/alerts.model';
+import { Alert, AlertType } from '@alerts/models/alerts.model';
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { filter } from 'rxjs/operators';
 
-@Injectable({ providedIn: 'root' })
+@Injectable({
+  providedIn: 'any'
+})
 export class AlertsService {
   private subject = new Subject<Alert>();
   private defaultId = 'default-alert';
@@ -16,7 +18,10 @@ export class AlertsService {
 
   // main alert method
   alert(alert: Alert): void {
+    // using the nullish coalescing operator to assign default values
     alert.id = alert.id ?? this.defaultId;
+    alert.keepAfterRouteChange = alert.keepAfterRouteChange ?? true;
+    alert.autoClose = alert.autoClose ?? true;
     this.subject.next(alert);
   }
 
@@ -53,7 +58,6 @@ export class AlertsService {
     }));
   }
 
-  // clearing the alerts
   clear(id = this.defaultId): void {
     this.subject.next(new Alert({ id }));
   }

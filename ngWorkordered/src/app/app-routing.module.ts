@@ -1,11 +1,10 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 // login auth guard
 import { LoginAuthGuard } from '@guards/login-auth-guard/login.auth.guard';
 
 // my components
-import { HomeComponent } from '@components/home/home.component';
 import { LoginComponent } from '@components/accounts/login/login.component';
 import { RegisterComponent } from '@components/accounts/register/register.component';
 import { ChangePasswordComponent } from '@components/accounts/change-password/change-password.component';
@@ -16,19 +15,20 @@ import { ChangeSecondaryComponent } from '@components/accounts/change-phone-numb
 
 
 const routes: Routes = [
-  { path: '', component: HomeComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent },
   { path: 'changePassword', component: ChangePasswordComponent },
   { path: 'userProfile', component: UserProfileComponent, canActivate: [LoginAuthGuard] },
   { path: 'changePrimaryPhoneNumber', component: ChangePrimaryComponent, canActivate: [LoginAuthGuard] },
   { path: 'changeSecondaryPhoneNumber', component: ChangeSecondaryComponent, canActivate: [LoginAuthGuard] },
-  { path: 'addSecondaryPhoneNumber', component: AddPhoneNumberComponent, canActivate: [LoginAuthGuard] }
+  { path: 'addSecondaryPhoneNumber', component: AddPhoneNumberComponent, canActivate: [LoginAuthGuard] },
+  { path: 'test', loadChildren: () => import('./test/test.module').then(m => m.TestModule) },
 
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes,
+    { preloadingStrategy: PreloadAllModules })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

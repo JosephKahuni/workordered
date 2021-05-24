@@ -2,7 +2,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AccountsService } from '@services/accounts/accounts.service';
 import { Component, OnInit } from '@angular/core';
-import { AlertsService } from '@services/alerts/alerts.service';
+import { AlertsService } from '@alerts/services/alerts.service';
 import { UserProfileService } from '@services/user-profile/user-profile.service';
 
 @Component({
@@ -22,18 +22,12 @@ export class ChangePrimaryComponent implements OnInit {
 
   showPassword = false;
   user: any = [];
-  alertOptions = {
-    autoClose: true,
-    keepAfterRouteChange: true
-  };
-
   changePrimaryPhoneNumberForm!: FormGroup;
 
   ngOnInit(): void {
     this.user = this.userProfile.userProfile;
 
     this.generateForm();
-    console.log('CHANGE PRIMARY COMPONENT ACTIVATED');
   }
 
   private generateForm(): void {
@@ -64,12 +58,12 @@ export class ChangePrimaryComponent implements OnInit {
   }
 
   private changeSuccess(): void {
-    this.alertsService.success('Phone number changed successfully.', this.alertOptions);
+    this.alertsService.success('Phone number changed successfully.');
   }
 
   private changeError(): void {
     this.refreshPage();
-    this.alertsService.error('Phone number not changed. Please try again.', this.alertOptions);
+    this.alertsService.error('Phone number not changed. Please try again.');
   }
 
   private changeComplete(): void {

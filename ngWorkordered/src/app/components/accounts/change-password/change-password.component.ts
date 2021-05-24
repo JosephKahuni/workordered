@@ -1,4 +1,4 @@
-import { AlertsService } from '@services/alerts/alerts.service';
+import { AlertsService } from '@alerts/services/alerts.service';
 import { AccountsService } from '@services/accounts/accounts.service';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -21,12 +21,6 @@ export class ChangePasswordComponent implements OnInit {
   showPassword = false;
   showPasswordConfirmation = false;
   currentUrl!: string;
-
-
-  alertOptions = {
-    autoClose: true,
-    keepAfterRouteChange: true
-  };
 
   changePasswordForm!: FormGroup;
 
@@ -72,7 +66,7 @@ export class ChangePasswordComponent implements OnInit {
 
   // calllbacks 
   private passwordResetSuccessful(): void {
-    this.alertsService.success('Password updated successfully.', this.alertOptions);
+    this.alertsService.success('Password updated successfully.');
 
   }
   private passwordResetFailure(): void {
@@ -82,7 +76,7 @@ export class ChangePasswordComponent implements OnInit {
           this.router.navigate([this.currentUrl]);
         }
       );
-    this.alertsService.error('Password update failed. Please try again.', this.alertOptions);
+    this.alertsService.error('Password update failed. Please try again.');
 
   }
   private passwordResetComplete(): void {

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AccountsService } from '@services/accounts/accounts.service';
 import { Router } from '@angular/router';
-import { CookieService } from 'ngx-cookie-service';
 
 
 
@@ -15,7 +14,6 @@ export class NavComponent implements OnInit {
   constructor(
     public accountsService: AccountsService,
     private router: Router,
-    private cookieService: CookieService,
 
   ) { }
 

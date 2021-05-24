@@ -1,6 +1,6 @@
 import { UserProfileService } from '@services/user-profile/user-profile.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AlertsService } from '@services/alerts/alerts.service';
+import { AlertsService } from '@alerts/services/alerts.service';
 import { Component, OnInit } from '@angular/core';
 import { AccountsService } from '@services/accounts/accounts.service';
 import { Router } from '@angular/router';
@@ -23,11 +23,6 @@ export class AddPhoneNumberComponent implements OnInit {
 
   showPassword = false;
   userProfile: any = [];
-  alertOptions = {
-    autoClose: true,
-    keepAfterRouteChange: true
-  };
-
   currentUrl!: string;
   addAlternativePhoneNumberForm!: FormGroup;
 
@@ -60,13 +55,13 @@ export class AddPhoneNumberComponent implements OnInit {
 
   // add phone number callbacks
   private addSuccessful(): void {
-    this.alertsService.success('Phone number successfully saved.', this.alertOptions);
+    this.alertsService.success('Phone number successfully added.');
 
   }
 
   private addFailed(): void {
     this.refreshPage();
-    this.alertsService.error('A failure occured. Phone number not saved. Please try again.', this.alertOptions);
+    this.alertsService.error('A failure occured. Phone number not saved. Please try again.');
 
   }
 

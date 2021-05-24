@@ -1,4 +1,4 @@
-import { AlertsService } from '@services/alerts/alerts.service';
+import { AlertsService } from '@alerts/services/alerts.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { UserProfileService } from '@services/user-profile/user-profile.service';
@@ -29,11 +29,6 @@ export class ChangeSecondaryComponent implements OnInit {
 
   showPassword = false;
   changeSecondaryPhoneNumberForm!: FormGroup;
-
-  alertOptions = {
-    autoClose: true,
-    keepAfterRouteChange: true
-  };
 
   ngOnInit(): void {
     this.currentUrl = this.router.url;
@@ -74,7 +69,7 @@ export class ChangeSecondaryComponent implements OnInit {
 
   // changePhoneNumber callbacks
   private updateSuccessful(): void {
-    this.alertsService.success('Phone number changed successfully.', this.alertOptions);
+    this.alertsService.success('Phone number changed successfully.');
   }
 
   private refreshPage(): any {
@@ -84,7 +79,7 @@ export class ChangeSecondaryComponent implements OnInit {
 
   private updateFailure(): void {
     this.refreshPage();
-    this.alertsService.error('Phone number update failed. Please try again.', this.alertOptions);
+    this.alertsService.error('Phone number update failed. Please try again.');
   }
 
   private updateComplete(): void {

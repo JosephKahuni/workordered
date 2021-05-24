@@ -1,4 +1,4 @@
-import { AlertsService } from '@services/alerts/alerts.service';
+import { AlertsService } from '@alerts/services/alerts.service';
 import { AccountsService } from '@services/accounts/accounts.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -30,10 +30,6 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   private returnUrl!: string;
   private loginSubscription!: Subscription;
-  alertOptions = {
-    autoClose: true,
-    keepAfterRouteChange: true
-  };
 
 
   ngOnInit(): void {
@@ -74,8 +70,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   private errorCallback(): void {
     this.refreshPage();
     this.spinner.hide();
-    this.alertsService.error('Invalid login credentials. Please confirm your details and try again.',
-      this.alertOptions);
+    this.alertsService.error('Invalid login credentials. Please confirm your details and try again.');
 
 
   }

@@ -1,4 +1,4 @@
-import { AlertsService } from '@services/alerts/alerts.service';
+import { AlertsService } from '@alerts/services/alerts.service';
 import { AccountsService } from '@services/accounts/accounts.service';
 import { NG_ASYNC_VALIDATORS, AsyncValidator, ValidationErrors, AbstractControl } from '@angular/forms';
 import { Directive } from '@angular/core';
@@ -19,11 +19,6 @@ export class VerifyUserExistsDirective implements AsyncValidator {
     private accountsService: AccountsService,
     private alertsService: AlertsService
   ) { }
-
-  alertOptions = {
-    autoClose: true,
-    keepAfterRouteChange: false
-  };
   private subscription!: Subscription;
 
   validate(control: AbstractControl): Promise<ValidationErrors | null> | Observable<ValidationErrors | null> {
@@ -53,8 +48,8 @@ export class VerifyUserExistsDirective implements AsyncValidator {
                   noActiveUser: {
                     value:
                       this.alertsService.error(
-                        'Invalid credentials. Check your username/payroll number or phone number.',
-                        this.alertOptions)
+                        'Invalid credentials. Check your username/payroll number or phone number.'
+                      )
                   }
                 } : null;
 

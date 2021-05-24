@@ -1,12 +1,11 @@
-import { Alert, AlertType } from '@models/alerts/alerts.model';
-import { AlertsService } from '@services/alerts/alerts.service';
+import { Alert, AlertType } from '@alerts/models/alerts.model';
+import { AlertsService } from '@alerts/services/alerts.service';
 import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { Router, NavigationStart } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 
 @Component({
-  // tslint:disable-next-line: component-selector
   selector: 'app-custom-alerts',
   templateUrl: './alerts.component.html'
 })
@@ -36,7 +35,7 @@ export class AlertsComponent implements OnInit, OnDestroy {
 
         // auto close the alert if required
         if (alert.autoClose) {
-          setTimeout(() => this.removeAlert(alert), 8000);
+          setTimeout(() => this.removeAlert(alert), 15000);
         }
       });
 

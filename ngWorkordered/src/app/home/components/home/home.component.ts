@@ -20,7 +20,7 @@ export class HomeComponent implements OnInit {
       () => {
         this.loading = false;
         this.spinner.hide();
-      }, 50
+      }, 5
     );
   }
 

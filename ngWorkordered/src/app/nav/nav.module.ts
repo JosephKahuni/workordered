@@ -1,7 +1,7 @@
+import { AccountsModule } from 'src/app/accounts/accounts.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AvatarModule } from 'ngx-avatar';
-import { AccountsService } from '@services/accounts/accounts.service';
 import { NavComponent } from '@nav/components/nav.component';
 import { AppRoutingModule } from './../app-routing.module';
 
@@ -12,10 +12,10 @@ import { AppRoutingModule } from './../app-routing.module';
   imports: [
     CommonModule,
     AvatarModule,
-    AppRoutingModule
+    AppRoutingModule,
+    AccountsModule
 
   ],
   exports: [NavComponent],
-  providers: [AccountsService]
 })
 export class NavModule { }

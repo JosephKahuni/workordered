@@ -1,4 +1,7 @@
-<nav class="navbar navbar-dark bg-dark sticky-top navbar-expand-sm" role="navigation">
+<nav
+  class="navbar navbar-dark bg-dark sticky-top navbar-expand-sm"
+  role="navigation"
+>
   <!-- <nav> -->
   <!-- <div class="nav-container"> -->
   <div class="navbar-item first">
@@ -61,8 +64,7 @@
           <div class="navbar-nav" id="my-collapsible-navbar">
             <div class="custom-nav-item register">
               <a
-                routerLink="register"
-                routerLinkActive="active"
+                routerLink="accounts/register"
                 class="nav-item"
                 aria-labelledby="register-link"
                 data-toggle="collapse"
@@ -90,7 +92,7 @@
 
             <div class="custom-nav-item login">
               <a
-                routerLink="login"
+                routerLink="accounts/login"
                 class="nav-item"
                 aria-labelledby="login-link"
                 data-toggle="collapse"
@@ -157,7 +159,11 @@
 
           <!-- user profile  -->
           <div class="dropdown-item user-profile">
-            <a (click)="fetchUserProfile()" class="nav-item"aria-labelledby="user-profile-link">
+            <a
+              (click)="fetchUserProfile()"
+              class="nav-item"
+              aria-labelledby="user-profile-link"
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="16"
@@ -181,7 +187,11 @@
 
           <!-- logout button  -->
           <div class="dropdown-item logout">
-            <a (click)="logout()" class="nav-item" aria-labelledby="logout-link">
+            <a
+              (click)="logout()"
+              class="nav-item"
+              aria-labelledby="logout-link"
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="16"

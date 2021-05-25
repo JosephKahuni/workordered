@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AccountsService } from '@services/accounts/accounts.service';
+import { AccountsService } from '@accounts/services/accounts/accounts.service';
 import { Router } from '@angular/router';
 
 
@@ -13,12 +13,14 @@ export class NavComponent implements OnInit {
 
   constructor(
     public accountsService: AccountsService,
-    private router: Router,
+    private router: Router
 
   ) { }
 
 
   ngOnInit(): void {
+    console.log('NAV COMPONENT ACTIVE');
+    console.log(this.accountsService.isLoggedIn);
 
   }
 
@@ -27,6 +29,6 @@ export class NavComponent implements OnInit {
   }
 
   fetchUserProfile(): void {
-    this.router.navigate(['userProfile']);
+    this.router.navigate(['accounts/userProfile']);
   }
 }

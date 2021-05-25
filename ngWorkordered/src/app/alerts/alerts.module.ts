@@ -1,6 +1,7 @@
 import { AlertsComponent } from '@alerts/components/alerts.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+// import { AlertsService } from '@alerts/services/alerts.service'
 
 
 
@@ -9,7 +10,8 @@ import { CommonModule } from '@angular/common';
   imports: [
     CommonModule
   ],
-  exports: [AlertsComponent]
+  exports: [AlertsComponent],
+  // providers: [AlertsService]
 
 })
 export class AlertsModule { }
